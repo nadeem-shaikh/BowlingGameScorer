@@ -6,7 +6,7 @@ public class ErrorResponse {
 	private String message;
 	private boolean errorExists;
 
-	public ErrorResponse() {
+	private ErrorResponse() {
 		setErrorExists(false);
 	}
 
