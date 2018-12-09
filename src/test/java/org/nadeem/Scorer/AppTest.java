@@ -1,5 +1,6 @@
 package org.nadeem.Scorer;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.nadeem.scorer.BowlingGame;
 import org.nadeem.scorer.utilities.ErrorResponse;
@@ -22,14 +23,20 @@ public class AppTest extends TestCase {
 	 */
 	public void testValidAppArguments() {
 
-		// Pass Score as App Argument
-		String[] args = { "5/5/5/5/5/5/5/5/5/6/5" };
+		try {
+			// Pass Score as App Argument
+			String[] args = { "5/5/5/5/5/5/5/5/5/6/5" };
 
-		// Validate App Arguments
-		Validator.getInstance().validateAppArguments(args);
+			// Validate App Arguments
+			Validator.getInstance().validateAppArguments(args);
 
-		// As argument provided is valid, errorExists should be false
-		assertEquals(ErrorResponse.getInstance().getErrorExists(), false);
+			// As argument provided is valid, errorExists should be false
+			assertEquals(ErrorResponse.getInstance().getErrorExists(), false);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Assert.fail();
+		}
 
 	}
 
@@ -37,15 +44,21 @@ public class AppTest extends TestCase {
 	 * Test Case for Validating App Arguments)
 	 */
 	public void testInvalidAppArguments() {
+		try {
 
-		// Pass Score as App Argument
-		String[] args = {};
+			// Pass Score as App Argument
+			String[] args = {};
 
-		// Validate App Arguments
-		Validator.getInstance().validateAppArguments(args);
+			// Validate App Arguments
+			Validator.getInstance().validateAppArguments(args);
 
-		// As argument provided is invalid, errorExists should be true
-		assertEquals(ErrorResponse.getInstance().getErrorExists(), true);
+			// As argument provided is invalid, errorExists should be true
+			assertEquals(ErrorResponse.getInstance().getErrorExists(), true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Assert.fail();
+		}
 
 	}
 
@@ -54,16 +67,22 @@ public class AppTest extends TestCase {
 	 */
 	public void testInvalidCharZeroInRolls() {
 
-		// Initialize rolls with values containing invalid character 0
-		String rolls = "XXXXX0XXXXXX";
-		// Validate App Arguments
-		Validator.getInstance().validateRolls(rolls);
+		try {
+			// Initialize rolls with values containing invalid character 0
+			String rolls = "XXXXX0XXXXXX";
+			// Validate App Arguments
+			Validator.getInstance().validateRolls(rolls);
 
-		// As rolls contain invalid character, errorExists should be true
-		assertEquals(ErrorResponse.getInstance().getErrorExists(), true);
+			// As rolls contain invalid character, errorExists should be true
+			assertEquals(ErrorResponse.getInstance().getErrorExists(), true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Assert.fail();
+		}
 
 	}
-	
+
 	/**
 	 * Test Game Score for Sample Rolls which contains 12 rolls : 12 Strikes = 10
 	 * frames * 30 points = 300
@@ -72,9 +91,9 @@ public class AppTest extends TestCase {
 
 		String rolls = "XXXXXXXXXXXX";
 		BowlingGame game = new BowlingGame(rolls);
-		int score = game.calculateScore();
-		System.out.println("Game Score is - " + score);
-		assertEquals(score, 300);
+		game.calculateScore();
+		System.out.println("Game Score is - " + game.getScore());
+		assertEquals(game.getScore(), 300);
 	}
 
 	/**
@@ -85,9 +104,9 @@ public class AppTest extends TestCase {
 
 		String rolls = "9-9-9-9-9-9-9-9-9-9-";
 		BowlingGame game = new BowlingGame(rolls);
-		int score = game.calculateScore();
-		System.out.println("Game Score is - " + score);
-		assertEquals(score, 90);
+		game.calculateScore();
+		System.out.println("Game Score is - " + game.getScore());
+		assertEquals(game.getScore(), 90);
 	}
 
 	/**
@@ -98,34 +117,34 @@ public class AppTest extends TestCase {
 
 		String rolls = "5/5/5/5/5/5/5/5/5/5/5";
 		BowlingGame game = new BowlingGame(rolls);
-		int score = game.calculateScore();
-		System.out.println("Game Score is - " + score);
-		assertEquals(score, 150);
+		game.calculateScore();
+		System.out.println("Game Score is - " + game.getScore());
+		assertEquals(game.getScore(), 150);
 	}
 
 	public void testAppForSamples() {
 		String rolls = "5/5/5/5/5/5/5/5/5/6/3";
 		BowlingGame game = new BowlingGame(rolls);
-		int score = game.calculateScore();
-		System.out.println("Game Score is - " + score);
-		assertEquals(score, 149);
+		game.calculateScore();
+		System.out.println("Game Score is - " + game.getScore());
+		assertEquals(game.getScore(), 149);
 
 		rolls = "XXXXXXXXXX81";
 		game = new BowlingGame(rolls);
-		score = game.calculateScore();
-		System.out.println("Game Score is - " + score);
-		assertEquals(score, 287);
+		game.calculateScore();
+		System.out.println("Game Score is - " + game.getScore());
+		assertEquals(game.getScore(), 287);
 
 		rolls = "X81XXXXXXXXXX";
 		game = new BowlingGame(rolls);
-		score = game.calculateScore();
-		System.out.println("Game Score is - " + score);
-		assertEquals(score, 268);
+		game.calculateScore();
+		System.out.println("Game Score is - " + game.getScore());
+		assertEquals(game.getScore(), 268);
 
 		rolls = "X8/XXXXXXXXXX";
 		game = new BowlingGame(rolls);
-		score = game.calculateScore();
-		System.out.println("Game Score is - " + score);
-		assertEquals(score, 280);
+		game.calculateScore();
+		System.out.println("Game Score is - " + game.getScore());
+		assertEquals(game.getScore(), 280);
 	}
 }

@@ -24,39 +24,45 @@ public class BowlingGame {
 		this.rolls = rolls;
 	}
 
-	public Integer calculateScore() {
+	public void calculateScore() {
 
-		// Calculate the number of bonus balls awarded after the final frame.
-		int bonusRolls = 0;
+		try {
 
-		if (rolls.charAt(rolls.length() - 3) == 'X') {
-			bonusRolls = 2;
-		} else if (rolls.charAt(rolls.length() - 2) == '/') {
-			bonusRolls = 1;
-		}
+			// Calculate the number of bonus balls awarded after the final frame.
+			int bonusRolls = 0;
 
-		System.out.println("rolls are - " + rolls);
-
-		// Calculate base Score for Each Frame
-		for (int i = 0; i < (rolls.length() - bonusRolls); i++) {
-			// System.out.println("Character is - " + rolls.charAt(i));
-
-			score += pointForScore(rolls, i);
-
-			// Calculate bonus per frame for a Spare
-			if (rolls.charAt(i) == '/') {
-				score += pointForScore(rolls, i + 1);
+			if (rolls.charAt(rolls.length() - 3) == 'X') {
+				bonusRolls = 2;
+			} else if (rolls.charAt(rolls.length() - 2) == '/') {
+				bonusRolls = 1;
 			}
 
-			// Calculate bonus per frame for a Strike
-			if (rolls.charAt(i) == 'X') {
-				score += pointForScore(rolls, i + 1) + pointForScore(rolls, i + 2);
+			System.out.println("rolls are - " + rolls);
+
+			// Calculate base Score for Each Frame
+			for (int i = 0; i < (rolls.length() - bonusRolls); i++) {
+				// System.out.println("Character is - " + rolls.charAt(i));
+
+				score += pointForScore(rolls, i);
+
+				// Calculate bonus per frame for a Spare
+				if (rolls.charAt(i) == '/') {
+					score += pointForScore(rolls, i + 1);
+				}
+
+				// Calculate bonus per frame for a Strike
+				if (rolls.charAt(i) == 'X') {
+					score += pointForScore(rolls, i + 1) + pointForScore(rolls, i + 2);
+				}
 			}
+		} catch (Exception e) {
+			System.err.println("Error in calculateScore - Error = " + e);
+			e.printStackTrace();
 		}
-		return score;
+
 	}
 
-	public Integer pointForScore(String rolls, Integer index) {
+	public Integer pointForScore(String rolls, Integer index) throws Exception {
 		if (rolls.charAt(index) == 'X')
 			return 10;
 		if (rolls.charAt(index) == '-')

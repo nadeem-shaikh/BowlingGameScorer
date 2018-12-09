@@ -9,7 +9,7 @@ public class Validator {
 		return validatorObj;
 	}
 
-	public void validateRolls(String rolls) {
+	public void validateRolls(String rolls)  throws Exception{
 
 		// Check if the length of the scores provided is less than 12 or more than 21
 		if (rolls.length() < 12 || rolls.length() > 21) {
@@ -32,7 +32,7 @@ public class Validator {
 		}
 	}
 
-	public void validateAppArguments(String[] args) {
+	public void validateAppArguments(String[] args)  throws Exception {
 
 		// Initialize Error Flag to False
 		ErrorResponse.getInstance().setErrorExists(false);
