@@ -28,3 +28,5 @@ You will need below tools before you run this application
 2.  cd BowlingGameScorer/
 3.  mvn package
 4.  java -jar target/scorer-0.0.1-SNAPSHOT.jar XXXXXXXXXXXX
+
+
